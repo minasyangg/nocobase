@@ -24,7 +24,14 @@
       "module": "commonjs"
     }
   },
-  "include": [".dumi/**/*", ".dumirc.ts", "packages/**/*", "playwright.config.ts", "vitest.config.mts"],
+  "include": [
+    ".dumi/**/*",
+    ".dumirc.ts",
+    "packages/**/*",
+    "playwright.config.ts",
+    "vitest.config.mts",
+    "init-teacher-system.ts"
+  ],
   "exclude": [
     "packages/**/node_modules",
     "packages/**/dist",

@@ -1,0 +1,83 @@
+{
+  "subjects": [
+    {
+      "name": "Математика",
+      "description": "Курс математики для 7-8 классов",
+      "color": "#FF6B6B",
+      "icon": "📚"
+    },
+    {
+      "name": "Физика",
+      "description": "Курс физики для 7-8 классов",
+      "color": "#4ECDC4",
+      "icon": "🔬"
+    },
+    {
+      "name": "Вероятность и статистика",
+      "description": "Введение в вероятность и статистику",
+      "color": "#45B7D1",
+      "icon": "📊"
+    },
+    {
+      "name": "Геометрия",
+      "description": "Курс геометрии для 7-8 классов",
+      "color": "#96CEB4",
+      "icon": "📐"
+    }
+  ],
+  "classes": [
+    {
+      "name": "7А",
+      "year": 7,
+      "letter": "А",
+      "description": "Класс 7А"
+    },
+    {
+      "name": "7Б",
+      "year": 7,
+      "letter": "Б",
+      "description": "Класс 7Б"
+    },
+    {
+      "name": "8А",
+      "year": 8,
+      "letter": "А",
+      "description": "Класс 8А"
+    },
+    {
+      "name": "8Б",
+      "year": 8,
+      "letter": "Б",
+      "description": "Класс 8Б"
+    }
+  ],
+  "students": [
+    {
+      "firstName": "Иван",
+      "lastName": "Сидоров",
+      "middleName": "Петрович",
+      "email": "ivan.sidorov@example.com",
+      "phone": "+7-900-123-45-67",
+      "studentType": "school_7",
+      "notes": "Активный участник"
+    },
+    {
+      "firstName": "Мария",
+      "lastName": "Петрова",
+      "middleName": "Ивановна",
+      "email": "maria.petrova@example.com",
+      "phone": "+7-900-234-56-78",
+      "studentType": "school_8",
+      "notes": "Отличница"
+    },
+    {
+      "firstName": "Алексей",
+      "lastName": "Иванов",
+      "middleName": "Сергеевич",
+      "email": "alexey.ivanov@example.com",
+      "phone": "+7-900-345-67-89",
+      "studentType": "private",
+      "notes": "Частный ученик, выучивает программирование"
+    }
+  ]
+}
