@@ -18,7 +18,7 @@
 ```bash
 # В первом терминале
 cd d:/www/nocobase
-NODE_OPTIONS="--max_old_space_size=6144" npm run dev
+NODE_OPTIONS="--max_old_space_size=8192" npm run dev
 ```
 
 Проверьте: http://localhost:13000 должен быть доступен
