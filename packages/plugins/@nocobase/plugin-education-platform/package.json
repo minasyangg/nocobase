@@ -1,0 +1,34 @@
+{
+  "name": "@nocobase/plugin-education-platform",
+  "version": "0.1.0",
+  "displayName": "Education Platform",
+  "displayName.ru-RU": "Образовательная Платформа", 
+  "displayName.zh-CN": "教育平台",
+  "description": "Comprehensive educational platform with courses, lessons, assignments and grading system",
+  "description.ru-RU": "Комплексная образовательная платформа с курсами, уроками, заданиями и системой оценивания",
+  "description.zh-CN": "综合教育平台，包括课程、课时、作业和评分系统",
+  "keywords": [
+    "Education",
+    "Learning",
+    "Courses",
+    "Assignments",
+    "Grading"
+  ],
+  "main": "dist/server/index.js",
+  "nocobase": {
+    "client": "dist/client/index.js"
+  },
+  "scripts": {
+    "build": "nocobase build",
+    "watch": "nocobase build --watch"
+  },
+  "dependencies": {
+    "@nocobase/plugin-file-manager": "1.x"
+  },
+  "peerDependencies": {
+    "@nocobase/client": "1.x",
+    "@nocobase/server": "1.x",
+    "@nocobase/test": "1.x",
+    "@nocobase/plugin-file-manager": "1.x"
+  }
+}

@@ -54,6 +54,10 @@ export default class extends Migration {
 
       let schemaCount = 0;
       for (const item of items) {
+        if (!item.schema['x-collection-field']) {
+          console.warn(`[Migration Fix] Skipping invalid schema ${item.id} missing x-collection-field`);
+          continue;
+        }
         const [collectionName, name] = item.schema['x-collection-field'].split('.');
         const field = await FieldRepo.findOne({
           filter: {
