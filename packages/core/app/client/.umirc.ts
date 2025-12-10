@@ -74,6 +74,17 @@ export default defineConfig({
     jsStrategy: 'depPerChunk',
   },
   chainWebpack(config, { env }) {
+    // Fix cytoscape import used by mermaid's mindmap (mermaid imports
+    // 'cytoscape/dist/cytoscape.umd.js' which isn't exportable for ESM import).
+    // Redirect those paths to the ESM build so bundler can resolve them.
+    try {
+      config.resolve.alias.set('cytoscape/dist/cytoscape.umd.js', 'cytoscape/dist/cytoscape.esm.mjs');
+      config.resolve.alias.set('cytoscape/dist/cytoscape.cjs.js', 'cytoscape/dist/cytoscape.esm.mjs');
+      config.resolve.alias.set('cytoscape', 'cytoscape/dist/cytoscape.esm.mjs');
+    } catch (e) {
+      // ignore if alias API not available in this environment
+    }
+
     if (env === 'production') {
       config.plugin('ignore nocobase plugins').use(require('webpack').IgnorePlugin, [
         {
@@ -81,6 +92,7 @@ export default defineConfig({
         },
       ]);
     }
+
     return config;
   },
   extraBabelPlugins: ['react-imported-component/babel'],
