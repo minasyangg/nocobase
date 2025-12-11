@@ -23,10 +23,13 @@
     "watch": "nocobase build --watch"
   },
   "dependencies": {
-    "@nocobase/plugin-file-manager": "1.x"
+    "@nocobase/database": "1.x",
+    "@nocobase/plugin-file-manager": "1.x",
+    "@nocobase/server": "1.x"
   },
   "peerDependencies": {
     "@nocobase/client": "1.x",
+    "@nocobase/database": "1.x",
     "@nocobase/server": "1.x",
     "@nocobase/test": "1.x",
     "@nocobase/plugin-file-manager": "1.x"

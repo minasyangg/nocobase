@@ -7,50 +7,67 @@
  * For more information, please refer to: https://www.nocobase.com/agreement.
  */
 
-// @ts-ignore
 import { Plugin } from '@nocobase/server';
+import educationCollections, { collectionNames } from './collections';
+
+const DEFAULT_ACTIONS = ['list', 'get', 'create', 'update', 'destroy'] as const;
+const COLLECTION_ACTIONS = collectionNames.flatMap((collectionName) =>
+  DEFAULT_ACTIONS.map((action) => `${collectionName}:${action}`),
+);
 
 export class PluginEducationPlatformServer extends Plugin {
-  async afterAdd() {
-    // Логика после добавления плагина
-  }
+  async afterAdd() {}
 
-  async beforeLoad() {
-    // Логика перед загрузкой плагина
-  }
+  async beforeLoad() {}
 
   async load() {
-    // Импортируем и загружаем все коллекции
-    // await this.importCollections();
+    this.registerAclSnippet();
 
-    console.log('Education Platform Plugin: All collections loaded successfully');
-    console.log('Available collections:');
-    console.log('- taxonomies (справочники)');
-    console.log('- student_profiles, teacher_profiles, parent_profiles');
-    console.log('- classes, courses, lessons');
-    console.log('- assignments, grades');
-    console.log('- lesson_student_assignments, student_parent_relations');
+    this.app.dataSourceManager.afterAddDataSource((dataSource) => {
+      this.registerCollections(dataSource);
+      this.registerCollectionsAcl(dataSource);
+    });
+
+    this.log.info('Education Platform Plugin loaded with %d collections.', educationCollections.length);
   }
 
-  async install() {
-    // Логика установки плагина
+  async install() {}
+
+  async afterEnable() {}
+
+  async afterDisable() {}
+
+  async remove() {}
+
+  private registerCollections(dataSource) {
+    const { collectionManager } = dataSource;
+    type CollectionDefinition = Parameters<typeof collectionManager.defineCollection>[0];
+
+    educationCollections.forEach((collection) => {
+      if (collectionManager.hasCollection(collection.name)) {
+        this.log.debug(
+          'Collection "%s" is already registered for data source "%s", skipping.',
+          collection.name,
+          dataSource.name,
+        );
+        return;
+      }
+
+      collectionManager.defineCollection(collection as CollectionDefinition);
+    });
   }
 
-  async afterEnable() {
-    // Логика после включения плагина
+  private registerAclSnippet() {
+    this.app.acl.registerSnippet({
+      name: `pm.${this.name}`,
+      actions: COLLECTION_ACTIONS,
+    });
   }
 
-  async afterDisable() {
-    // Логика после отключения плагина
-  }
-
-  async remove() {
-    // Логика удаления плагина
-  }
-
-  private async importCollections() {
-    // Коллекции уже созданы через API
-    // Этот метод можно оставить пустым или удалить
+  private registerCollectionsAcl(dataSource) {
+    collectionNames.forEach((collectionName) => {
+      dataSource.acl.allow(collectionName, ['list', 'get'], 'loggedIn');
+    });
   }
 }
 
